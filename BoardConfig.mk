@@ -38,7 +38,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USES_MMCUTILS := true
 #BOARD_RECOVERY_IGNORE_BOOTABLES := true
 # Use this flag if the board has a ext4 partition larger than 2gb
-BOARD_HAS_LARGE_FILESYSTEM := true
+#BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_PREINSTALL := true
 BOARD_DATA_DEVICE := /dev/block/mmcblk0p16
 BOARD_DATA_FILESYSTEM := ext3
