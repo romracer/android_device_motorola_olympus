@@ -1,3 +1,4 @@
+ATRIX_BUILD := true
 USE_CAMERA_STUB := true
 BOARD_USES_GENERIC_AUDIO := false
 
