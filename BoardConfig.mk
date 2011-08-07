@@ -1,4 +1,3 @@
-ATRIX_BUILD := true
 USE_CAMERA_STUB := true
 BOARD_USES_GENERIC_AUDIO := false
 
@@ -16,7 +15,16 @@ TARGET_ARCH_VARIANT_FPU := vfpv3-d16
 TARGET_CPU_SMP := true
 TARGET_HAVE_TEGRA_ERRATA_657451 := true
 
-BOARD_KERNEL_CMDLINE := 
+ifeq ($(BUILD_FOR_INTL_D00),true)
+        BOARD_KERNEL_CMDLINE := mem=384M@0M nvmem=128M@384M mem=512M@512M vmalloc=256M video=tegrafb console=none usbcore.old_scheme_first=1 tegraboot=sdmmc tegrapart=mbr:d00:100:800,kpanic:2100:400:800 security=tomoyo mot_prod=1
+else
+ifeq ($(BUILD_FOR_INTL_1100),true)
+        BOARD_KERNEL_CMDLINE := mem=384M@0M nvmem=128M@384M mem=512M@512M vmalloc=256M video=tegrafb console=none usbcore.old_scheme_first=1 tegraboot=sdmmc tegrapart=mbr:1100:100:800,kpanic:2500:400:800 security=tomoyo mot_prod=1
+else
+	BOARD_KERNEL_CMDLINE :=
+endif
+endif
+
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_PAGE_SIZE := 0x00000800
 
@@ -55,6 +63,7 @@ BOARD_PREINSTALL_FILESYSTEM := ext3
 BOARD_PREINSTALL_FILESYSTEM_OPTIONS := noatime,nodiratime,data=ordered
 BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
 BOARD_HAS_SDCARD_INTERNAL := true
+BOARD_HAS_WEBTOP := true
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk0p18
 BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1p1
 BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p18
