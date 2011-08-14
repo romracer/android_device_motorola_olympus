@@ -64,6 +64,7 @@ BOARD_PREINSTALL_FILESYSTEM_OPTIONS := noatime,nodiratime,data=ordered
 BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_HAS_WEBTOP := true
+BOARD_RECOVERY_HANDLES_MOUNT := true
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk0p18
 BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1p1
 BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p18
