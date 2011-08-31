@@ -21,4 +21,3 @@
 # function: add_lunch_combo generic-eng
 
 add_lunch_combo generic_olympus-userdebug
-add_lunch_combo full_olympus-eng
