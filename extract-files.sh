@@ -17,7 +17,7 @@
 VENDOR=motorola
 DEVICE=olympus
 
-rm -rf ../../../vendor/$VENDOR/$DEVICE
+rm -rf ../../../vendor/$VENDOR/$DEVICE/* #dont delete the git folder
 mkdir -p ../../../vendor/$VENDOR/$DEVICE/proprietary/app
 mkdir -p ../../../vendor/$VENDOR/$DEVICE/proprietary/bin
 mkdir -p ../../../vendor/$VENDOR/$DEVICE/proprietary/etc/firmware
@@ -242,7 +242,9 @@ adb pull /system/lib/libstagefrighthw.so ../../../vendor/$VENDOR/$DEVICE/proprie
 
 #wgetable proprietaries
 BASEURL="http://atrix-dev-team.github.com/android_vendor_motorola_olympus/"
-#example for later
-#wget "${BASEURL}Usb.apk" -O ../../../vendor/$VENDOR/$DEVICE/proprietary/app/Usb.apk
+wget "${BASEURL}touchpad.cfg" -O ../../../vendor/$VENDOR/$DEVICE/proprietary/etc/touchpad/22/touchpad.cfg
+wget "${BASEURL}FastDormancy.apk" -O ../../../vendor/$VENDOR/$DEVICE/proprietary/app/FastDormancy.apk
+wget "${BASEURL}battd" -O ../../../vendor/$VENDOR/$DEVICE/proprietary/bin/battd
+wget "${BASEURL}libbattd.so" -O ../../../vendor/$VENDOR/$DEVICE/proprietary/lib/libbattd.so
 
 ./setup-makefiles.sh

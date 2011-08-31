@@ -51,27 +51,26 @@ BOARD_PAGE_SIZE := 0x00000800
 
 BOARD_HAS_NO_MISC_PARTITION := true
 # fix this up by examining /proc/mtd on a running device
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00800000
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00800000
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x14000000
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x80000000
+BOARD_BOOTIMAGE_PARTITION_SIZE := 4194304
+#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 4194304
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 167772160
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 1073741824
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_HAS_JANKY_BACKBUFFER := true
 TARGET_PREBUILT_KERNEL := device/motorola/olympus/kernel
-#faux123, don't use ext4 for now
-#TARGET_USERIMAGES_USE_EXT4 := false
+TARGET_USERIMAGES_USE_EXT4 := true
 # Below is a sample of how you can tweak the mount points using the board config.
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_RECOVERY_IGNORE_BOOTABLES := true
 BOARD_DATA_DEVICE := /dev/block/mmcblk0p16
-BOARD_DATA_FILESYSTEM := ext3
-BOARD_DATA_FILESYSTEM_OPTIONS := nosuid,nodev,relatime,data=ordered
+BOARD_DATA_FILESYSTEM := ext4
+BOARD_DATA_FILESYSTEM_OPTIONS := nosuid,nodev,relatime,barrier=1,noauto_da_alloc
 BOARD_SYSTEM_DEVICE := /dev/block/mmcblk0p12
-BOARD_SYSTEM_FILESYSTEM_OPTIONS := noatime,nodiratime,data=ordered
-BOARD_SYSTEM_FILESYSTEM := ext3
+BOARD_SYSTEM_FILESYSTEM_OPTIONS := noatime,nodiratime,barrier=1,noauto_da_alloc
+BOARD_SYSTEM_FILESYSTEM := ext4
 BOARD_CACHE_DEVICE := /dev/block/mmcblk0p15
-BOARD_CACHE_FILESYSTEM := ext3
-BOARD_CACHE_FILESYSTEM_OPTIONS := nosuid,nodev,relatime,data=ordered
+BOARD_CACHE_FILESYSTEM := ext4
+BOARD_CACHE_FILESYSTEM_OPTIONS := nosuid,nodev,relatime,barrier=1,noauto_da_alloc
 BOARD_HIJACK_RECOVERY_PATH := /preinstall/
 BOARD_HAS_PREINSTALL := true
 TARGET_NO_BOOT := false
@@ -95,7 +94,6 @@ BOARD_HIJACK_RECOVERY_UPDATE_ZIP := /preinstall/update-recovery.zip
 BOARD_PREINSTALL_DEVICE := /dev/block/mmcblk0p17
 BOARD_PREINSTALL_FILESYSTEM := ext3
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_HAS_LARGE_FILESYSTEM := true
 
 BOARD_USES_HW_MEDIARECORDER := true
 BOARD_USES_HW_MEDIASCANNER := false
@@ -108,8 +106,8 @@ BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION      := VER_0_6_X
 BOARD_WLAN_DEVICE           := bcm4329
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
-#WIFI_DRIVER_FW_STA_PATH     := "/system/etc/wl/sdio-ag-cdc-full11n-minioctl-roml-pno-wme-aoe-pktfilter-keepalive.bin"
-#WIFI_DRIVER_FW_AP_PATH      := "/system/etc/wl/sdio-g-cdc-roml-reclaim-wme-apsta-idauth-minioctl.bin"
+WIFI_DRIVER_FW_STA_PATH     := "/system/etc/wl/sdio-ag-cdc-full11n-minioctl-roml-pno-wme-aoe-pktfilter-keepalive.bin"
+WIFI_DRIVER_FW_AP_PATH      := "/system/etc/wl/sdio-g-cdc-roml-reclaim-wme-apsta-idauth-minioctl.bin"
 WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wl/sdio-ag-cdc-full11n-minioctl-roml-pno-wme-aoe-pktfilter-keepalive.bin nvram_path=/system/etc/wl/nvram.txt"
 WIFI_DRIVER_MODULE_NAME     := "dhd"
 
@@ -126,3 +124,7 @@ TARGET_SPECIFIC_HEADER_PATH := device/motorola/olympus/include
 
 #EGL
 BOARD_EGL_CFG := device/motorola/olympus/egl.cfg
+
+#USB Tethering
+BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/olympus/UsbController.cpp
+BOARD_HAS_LARGE_FILESYSTEM := true
